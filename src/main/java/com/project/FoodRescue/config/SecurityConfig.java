@@ -118,7 +118,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/donations/**",
                                 "/api/claims/**"
-                        ).authenticated()
+                        ).permitAll().anyRequest().authenticated()
 
                         .requestMatchers(
                                 "/api/auth/login",
