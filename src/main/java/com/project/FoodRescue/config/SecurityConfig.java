@@ -65,7 +65,7 @@ public class SecurityConfig {
                 new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
+                List.of("http://localhost:5173", "https://food-rescue-soumil-shamaks-projects.vercel.app/")
         );
 
         configuration.setAllowedMethods(
@@ -102,6 +102,9 @@ public class SecurityConfig {
             HttpSecurity http) throws Exception {
 
         http
+                .cors(cors -> cors
+                        .configurationSource(corsConfigurationSource())
+                )
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
