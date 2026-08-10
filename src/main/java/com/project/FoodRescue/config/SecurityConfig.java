@@ -115,6 +115,10 @@ public class SecurityConfig {
                                 HttpMethod.OPTIONS,
                                 "/**"
                         ).permitAll()
+                        .requestMatchers(
+                                "/api/donations/**",
+                                "/api/claims/**"
+                        ).permitAll()
 
                         .requestMatchers(
                                 "/api/auth/login",
