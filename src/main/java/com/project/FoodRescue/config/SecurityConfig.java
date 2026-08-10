@@ -65,7 +65,7 @@ public class SecurityConfig {
                 new CorsConfiguration();
 
         configuration.setAllowedOrigins(
-                List.of("http://localhost:5173", "https://food-rescue-soumil-shamaks-projects.vercel.app")
+                List.of("http://localhost:5173", "https://food-rescue-soumil-shamaks-projects.vercel.app", "https://food-rescue-virid.vercel.app")
         );
 
         configuration.setAllowedMethods(
