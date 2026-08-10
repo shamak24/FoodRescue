@@ -4,5 +4,6 @@ public enum Status {
     AVAILABLE,
     CLAIMED,
     COMPLETED,
-    EXPIRED
+    EXPIRED,
+    CANCELLED
 }

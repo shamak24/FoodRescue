@@ -19,5 +19,7 @@ public class DonationResponse {
     private String pickUpLocation;
     private LocalDateTime expiryDate;
     private Status status;
+
     private UUID providerId;
+    private String providerUsername;
 }

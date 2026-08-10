@@ -5,6 +5,10 @@ import com.project.FoodRescue.dto.userLogin.LoginResponse;
 import com.project.FoodRescue.dto.userSignUp.RegisterRequest;
 import com.project.FoodRescue.dto.userSignUp.RegisterResponse;
 import com.project.FoodRescue.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,21 +22,49 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        LoginResponse response = userService.login(loginRequest);
-        if(response != null){
-            return new ResponseEntity<LoginResponse>(response, HttpStatus.OK);
-        }else
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request, HttpServletResponse response) {
+        try {
+            LoginResponse loginResponse =
+                    userService.login(
+                            loginRequest,
+                            request,
+                            response
+                    );
+            return ResponseEntity.ok(loginResponse);
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body(e.getMessage());
+        }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<RegisterResponse> signUp(@RequestBody RegisterRequest registerRequest){
-        RegisterResponse response = userService.signUp(registerRequest);
-        if(response != null){
-            return new ResponseEntity<RegisterResponse>(response, HttpStatus.OK);
-        }else
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
+    public ResponseEntity<?> signUp(
+            @RequestBody RegisterRequest registerRequest) {
+        try {
+            RegisterResponse response =
+                    userService.signUp(registerRequest);
+
+            if (response != null) {
+                return new ResponseEntity<>(
+                        response,
+                        HttpStatus.CREATED
+                );
+            }
+            return new ResponseEntity<>(
+                    "Username or email already exists",
+                    HttpStatus.CONFLICT
+            );
+
+        } catch (Exception e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
     }
 }

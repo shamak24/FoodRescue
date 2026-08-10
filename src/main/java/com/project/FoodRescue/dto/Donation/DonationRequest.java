@@ -17,5 +17,4 @@ public class DonationRequest {
     private String unit;
     private String pickUpLocation;
     private String expiryDate;
-    private UUID providerId;
 }

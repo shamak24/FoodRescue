@@ -1,32 +1,76 @@
 package com.project.FoodRescue.controller;
 
+import com.project.FoodRescue.model.Claim;
+import com.project.FoodRescue.service.ClaimService;
+
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
-@RequestMapping("/api")
-@CrossOrigin
+@RequestMapping("/api/claims")
+@RequiredArgsConstructor
 public class ClaimController {
 
-    @PostMapping("/donations/{donateId}/claim")
-    public ResponseEntity<String> claimDonation(@PathVariable int donateId){
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+    private final ClaimService claimService;
+
+    @PostMapping("/{donationId}")
+    public ResponseEntity<?> claimDonation(@PathVariable UUID donationId) {
+        try {
+            Claim claim =
+                    claimService.claimDonation(donationId);
+
+            return new ResponseEntity<>(
+                    claim,
+                    HttpStatus.CREATED
+            );
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
     }
 
-//    @GetMapping("/claims/volunteer/{id}")
-//    public ResponseEntity<String> claimDonation(@PathVariable int id){
-//        return new ResponseEntity<>("Success", HttpStatus.OK);
-//    }
+    @GetMapping("/my")
+    public ResponseEntity<?> getMyClaims() {
 
-    @PutMapping("/claims/{id}/pickup")
-    public ResponseEntity<String> pickClaim(@PathVariable int id){
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+        try {
+
+            List<Claim> claims =
+                    claimService.getMyClaims();
+
+            return ResponseEntity.ok(claims);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .badRequest()
+                    .body(e.getMessage());
+        }
     }
 
-    @PutMapping("/claims/{id}/cancel")
-    public ResponseEntity<String> cancelClaim(@PathVariable int id){
-        return new ResponseEntity<>("Success", HttpStatus.OK);
+    @GetMapping("/{claimId}")
+    public ResponseEntity<?> getClaimById(
+            @PathVariable UUID claimId) {
+
+        try {
+
+            Claim claim =
+                    claimService.getClaimById(claimId);
+
+            return ResponseEntity.ok(claim);
+
+        } catch (RuntimeException e) {
+
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(e.getMessage());
+        }
     }
 }
