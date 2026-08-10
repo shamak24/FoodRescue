@@ -116,7 +116,35 @@ public class SecurityConfig {
                                 "/**"
                         ).permitAll()
                         .requestMatchers(
-                                "/api/donations/**",
+                                HttpMethod.GET,
+                                "/api/donations/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/donations/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/donations/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.DELETE,
+                                "/api/donations/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.GET,
+                                "/api/claims/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/claims/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.PUT,
+                                "/api/claims/**"
+                        ).permitAll()
+                        .requestMatchers(
+                                HttpMethod.DELETE,
                                 "/api/claims/**"
                         ).permitAll()
 
