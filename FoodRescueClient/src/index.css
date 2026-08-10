@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
+@import 'tailwindcss';
+
+:root {
+	color-scheme: light;
+	--background: 40 23% 96%;
+	--foreground: 156 15% 14%;
+	--card: 0 0% 100%;
+	--card-foreground: 156 15% 14%;
+	--muted: 148 18% 94%;
+	--muted-foreground: 155 10% 40%;
+	--border: 150 16% 86%;
+	--input: 150 16% 86%;
+	--primary: 154 61% 27%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 42 100% 92%;
+	--secondary-foreground: 24 55% 24%;
+	--accent: 31 93% 90%;
+	--accent-foreground: 19 57% 24%;
+	--destructive: 0 84% 55%;
+	--destructive-foreground: 0 0% 100%;
+	--ring: 154 61% 27%;
+	--radius: 1rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	font-family: 'Manrope', sans-serif;
+	color: hsl(var(--foreground));
+	background:
+		radial-gradient(circle at top left, rgba(242, 182, 90, 0.18), transparent 28%),
+		radial-gradient(circle at top right, rgba(54, 129, 87, 0.15), transparent 30%),
+		linear-gradient(180deg, #f9fbf8 0%, #f2f6f1 42%, #edf3ee 100%);
+}
+
+body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background-image: linear-gradient(rgba(72, 93, 82, 0.03) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(72, 93, 82, 0.03) 1px, transparent 1px);
+	background-size: 28px 28px;
+	mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 82%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Fraunces', Georgia, serif;
+	letter-spacing: -0.02em;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+#root {
+	min-height: 100vh;
+}
+
+::selection {
+	background: rgba(28, 101, 70, 0.16);
+}
